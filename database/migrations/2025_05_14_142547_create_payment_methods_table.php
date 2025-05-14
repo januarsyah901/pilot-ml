@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_type_id')->constrained();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('price', 12, 2);
-            $table->string('rank_tier')->nullable();
+            $table->string('provider');
+            $table->string('logo_url')->nullable();
+            $table->decimal('fee', 8, 2)->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('payment_methods');
     }
 };

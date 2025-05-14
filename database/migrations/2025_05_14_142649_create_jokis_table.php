@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('jokis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_type_id')->constrained();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('price', 12, 2);
-            $table->string('rank_tier')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->string('contact');
+            $table->integer('rating')->default(0);
+            $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('jokis');
     }
 };
